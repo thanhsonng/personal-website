@@ -72,7 +72,7 @@
   display: inline-flex;
   padding: 0.25em;
   margin-right: 1vw;
-  transition: color 250ms ease-out;
+  transition: all 250ms ease-in-out;
 }
 
 .settings a:last-of-type,
@@ -82,11 +82,23 @@
 
 .settings a:hover,
 .social a:hover {
-  transition: color 50ms ease-out;
+  transition: all 50ms ease-in-out;
 }
 
 .toggleDarkMode:hover {
-  color: #2795e9;
+  color: #7c3aed;
+}
+
+.toggleLightMode:hover {
+  color: #fde047;
+}
+
+.social a {
+  opacity: 50%;
+}
+
+.social a:hover {
+  opacity: 100%;
 }
 
 .twitter:hover {
@@ -98,7 +110,11 @@
 }
 
 .github:hover {
-  color: #c9510c;
+  color: #333333;
+}
+
+.githubDarkMode:hover {
+  color: white;
 }
 
 .youtube:hover {
