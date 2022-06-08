@@ -8,6 +8,7 @@ import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 
 import { useDarkMode } from 'lib/use-dark-mode'
 import * as config from 'lib/config'
+import soundManager from 'lib/sound'
 
 import styles from './styles.module.css'
 
@@ -16,17 +17,28 @@ import styles from './styles.module.css'
 export const FooterImpl: React.FC = () => {
   const [hasMounted, setHasMounted] = React.useState(false)
   const { isDarkMode, toggleDarkMode } = useDarkMode()
+  const switchOnAudioRef = React.useRef<HTMLAudioElement | null>(null)
+  const switchOffAudioRef = React.useRef<HTMLAudioElement | null>(null)
 
   const onToggleDarkMode = React.useCallback(
     (e) => {
       e.preventDefault()
       toggleDarkMode()
+      if (isDarkMode) {
+        soundManager.play(switchOnAudioRef.current);
+      } else {
+        soundManager.play(switchOffAudioRef.current);
+      }
     },
-    [toggleDarkMode]
+    [toggleDarkMode, isDarkMode]
   )
 
   React.useEffect(() => {
     setHasMounted(true)
+    // Sound logic has to be put inside an effect hook
+    // because it cannot run on the server
+    switchOnAudioRef.current = soundManager.createSound('/sounds/switch-on.mp3');
+    switchOffAudioRef.current = soundManager.createSound('/sounds/switch-off.mp3');
   }, [])
 
   return (
