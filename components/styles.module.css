@@ -94,11 +94,11 @@
 }
 
 .social a {
-  opacity: 50%;
+  transform: scale(60%);
 }
 
 .social a:hover {
-  opacity: 100%;
+  transform: scale(100%);
 }
 
 .twitter:hover {
