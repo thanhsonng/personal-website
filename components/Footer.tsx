@@ -1,15 +1,14 @@
 import * as React from 'react'
-import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
-import { FaZhihu } from '@react-icons/all-files/fa/FaZhihu'
-import { FaGithub } from '@react-icons/all-files/fa/FaGithub'
-import { FaLinkedin } from '@react-icons/all-files/fa/FaLinkedin'
-import { FaEnvelopeOpenText } from '@react-icons/all-files/fa/FaEnvelopeOpenText'
-import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube'
+import { RiTwitterLine as TwitterIcon } from '@react-icons/all-files/ri/RiTwitterLine'
+import { RiGithubLine as GithubIcon } from '@react-icons/all-files/ri/RiGithubLine'
+import { RiLinkedinLine as LinkedInIcon } from '@react-icons/all-files/ri/RiLinkedinLine'
+import { RiYoutubeLine as YouTubeIcon } from '@react-icons/all-files/ri/RiYoutubeLine'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 
 import { useDarkMode } from 'lib/use-dark-mode'
 import * as config from 'lib/config'
+import soundManager from 'lib/sound'
 
 import styles from './styles.module.css'
 
@@ -18,17 +17,28 @@ import styles from './styles.module.css'
 export const FooterImpl: React.FC = () => {
   const [hasMounted, setHasMounted] = React.useState(false)
   const { isDarkMode, toggleDarkMode } = useDarkMode()
+  const switchOnAudioRef = React.useRef<HTMLAudioElement | null>(null)
+  const switchOffAudioRef = React.useRef<HTMLAudioElement | null>(null)
 
   const onToggleDarkMode = React.useCallback(
     (e) => {
       e.preventDefault()
       toggleDarkMode()
+      if (isDarkMode) {
+        soundManager.play(switchOnAudioRef.current);
+      } else {
+        soundManager.play(switchOffAudioRef.current);
+      }
     },
-    [toggleDarkMode]
+    [toggleDarkMode, isDarkMode]
   )
 
   React.useEffect(() => {
     setHasMounted(true)
+    // Sound logic has to be put inside an effect hook
+    // because it cannot run on the server
+    switchOnAudioRef.current = soundManager.createSound('/sounds/switch-on.mp3');
+    switchOffAudioRef.current = soundManager.createSound('/sounds/switch-off.mp3');
   }, [])
 
   return (
@@ -38,7 +48,7 @@ export const FooterImpl: React.FC = () => {
       <div className={styles.settings}>
         {hasMounted && (
           <a
-            className={styles.toggleDarkMode}
+            className={isDarkMode ? styles.toggleLightMode : styles.toggleDarkMode}
             href='#'
             role='button'
             onClick={onToggleDarkMode}
@@ -58,31 +68,19 @@ export const FooterImpl: React.FC = () => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FaTwitter />
-          </a>
-        )}
-
-        {config.zhihu && (
-          <a
-            className={styles.zhihu}
-            href={`https://zhihu.com/people/${config.zhihu}`}
-            title={`Zhihu @${config.zhihu}`}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <FaZhihu />
+            <TwitterIcon />
           </a>
         )}
 
         {config.github && (
           <a
-            className={styles.github}
+            className={isDarkMode ? styles.githubDarkMode : styles.github}
             href={`https://github.com/${config.github}`}
             title={`GitHub @${config.github}`}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FaGithub />
+            <GithubIcon />
           </a>
         )}
 
@@ -94,19 +92,7 @@ export const FooterImpl: React.FC = () => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FaLinkedin />
-          </a>
-        )}
-
-        {config.newsletter && (
-          <a
-            className={styles.newsletter}
-            href={`${config.newsletter}`}
-            title={`Newsletter ${config.author}`}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <FaEnvelopeOpenText />
+            <LinkedInIcon />
           </a>
         )}
 
@@ -118,7 +104,7 @@ export const FooterImpl: React.FC = () => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FaYoutube />
+            <YouTubeIcon />
           </a>
         )}
       </div>
