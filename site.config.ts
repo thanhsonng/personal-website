@@ -10,11 +10,11 @@ export default siteConfig({
 
   // basic site info (required)
   name: 'Son Nguyen',
-  domain: 'nextjs-notion-starter-kit.transitivebullsh.it', // TODO: Update domain name here
+  domain: 'sonng.dev',
   author: 'Son Nguyen',
 
   // open graph metadata (optional)
-  description: 'Example Next.js Notion Starter Kit Site',
+  description: 'Experience in Front-End Development, by Son Nguyen',
 
   // social usernames (optional)
   twitter: 'thanhsonng211',
