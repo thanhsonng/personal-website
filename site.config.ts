@@ -9,7 +9,7 @@ export default siteConfig({
   rootNotionSpaceId: undefined,
 
   // basic site info (required)
-  name: 'Son Nguyen',
+  name: 'Front-End Journey',
   domain: 'sonng.dev',
   author: 'Son Nguyen',
 
@@ -28,6 +28,7 @@ export default siteConfig({
   defaultPageIcon: 'https://personal-use-singapore.s3.ap-southeast-1.amazonaws.com/default-page-icon.png',
   defaultPageCover: null,
   defaultPageCoverPosition: 0.5,
+  defaultSocialImageThumbnail: 'https://personal-use-singapore.s3.ap-southeast-1.amazonaws.com/default-page-cover.jpeg',
 
   // whether or not to enable support for LQIP preview images (optional)
   isPreviewImageSupportEnabled: true,

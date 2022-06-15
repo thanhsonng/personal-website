@@ -74,6 +74,10 @@ export const defaultPageCoverPosition: number = getSiteConfig(
   'defaultPageCoverPosition',
   0.5
 )
+export const defaultSocialImageThumbnail: string | null = getSiteConfig(
+  'defaultSocialImageThumbnail',
+  null,
+)
 
 // Optional whether or not to enable support for LQIP preview images
 export const isPreviewImageSupportEnabled: boolean = getSiteConfig(
