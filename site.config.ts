@@ -14,7 +14,7 @@ export default siteConfig({
   author: 'Son Nguyen',
 
   // open graph metadata (optional)
-  description: 'Experience in Front-End Development, by Son Nguyen',
+  description: 'Son Nguyen on Front-End',
 
   // social usernames (optional)
   twitter: 'thanhsonng211',
@@ -25,7 +25,7 @@ export default siteConfig({
 
   // default notion icon and cover images for site-wide consistency (optional)
   // page-specific values will override these site-wide defaults
-  defaultPageIcon: null,
+  defaultPageIcon: 'https://personal-use-singapore.s3.ap-southeast-1.amazonaws.com/default-page-icon.png',
   defaultPageCover: null,
   defaultPageCoverPosition: 0.5,
 
