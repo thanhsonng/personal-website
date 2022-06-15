@@ -43,11 +43,16 @@ export default withOGImage<'query', 'id'>({
         throw new Error('Invalid recordMap for page')
       }
 
+      const isHomePage = id === config.rootNotionPageId;
       const isBlogPost =
         block.type === 'page' && block.parent_table === 'collection'
-      const title = getBlockTitle(block, recordMap) || config.name
+      const title = isHomePage
+        ? config.name
+        : getBlockTitle(block, recordMap) || config.name
       const image = mapImageUrl(
-        getPageProperty<string>('Social Image', block, recordMap) ||
+        isHomePage
+          ? config.defaultSocialImageThumbnail
+          : getPageProperty<string>('Social Image', block, recordMap) ||
           (block as PageBlock).format?.page_cover ||
           config.defaultPageCover,
         block
@@ -86,13 +91,13 @@ export default withOGImage<'query', 'id'>({
       const dateUpdated = lastUpdatedTime
         ? new Date(lastUpdatedTime)
         : publishedTime
-        ? new Date(publishedTime)
-        : undefined
+          ? new Date(publishedTime)
+          : undefined
       const date =
         isBlogPost && dateUpdated
           ? `${dateUpdated.toLocaleString('en-US', {
-              month: 'long'
-            })} ${dateUpdated.getFullYear()}`
+            month: 'long'
+          })} ${dateUpdated.getFullYear()}`
           : undefined
       const detail = date || config.domain
 
@@ -114,7 +119,7 @@ export default withOGImage<'query', 'id'>({
                     {authorImage && (
                       <div
                         className='author-image'
-                        style={{ backgroundImage: `url(${authorImage})` }}
+                        style={{ backgroundImage: `url("${authorImage}")` }}
                       />
                     )}
 

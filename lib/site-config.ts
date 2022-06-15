@@ -20,6 +20,7 @@ export interface SiteConfig {
   defaultPageIcon?: string | null
   defaultPageCover?: string | null
   defaultPageCoverPosition?: number | null
+  defaultSocialImageThumbnail?: string | null,
 
   isPreviewImageSupportEnabled?: boolean
   isTweetEmbedSupportEnabled?: boolean
