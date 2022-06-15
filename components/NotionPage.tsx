@@ -119,10 +119,10 @@ const propertyLastEditedTimeValue = (
 }
 
 const propertyDateValue = (
-  { data, schema, pageHeader },
+  { data, schema },
   defaultFn: () => React.ReactNode
 ) => {
-  if (pageHeader && schema?.name?.toLowerCase() === 'published') {
+  if (schema?.name?.toLowerCase() === 'published') {
     const publishDate = data?.[0]?.[1]?.[0]?.[1]?.start_date
 
     if (publishDate) {
