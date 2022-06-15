@@ -14,7 +14,7 @@ export default siteConfig({
   author: 'Son Nguyen',
 
   // open graph metadata (optional)
-  description: 'Son Nguyen on Front-End',
+  description: 'Front-End Journey by Son Nguyen',
 
   // social usernames (optional)
   twitter: 'thanhsonng211',
