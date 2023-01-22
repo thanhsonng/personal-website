@@ -6,9 +6,9 @@ import { RiYoutubeLine as YouTubeIcon } from '@react-icons/all-files/ri/RiYoutub
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 
-import { useDarkMode } from 'lib/use-dark-mode'
-import * as config from 'lib/config'
-import soundManager from 'lib/sound'
+import soundManager from '@/lib/sound'
+import * as config from '@/lib/config'
+import { useDarkMode } from '@/lib/use-dark-mode'
 
 import styles from './styles.module.css'
 
