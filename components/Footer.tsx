@@ -20,7 +20,7 @@ export const FooterImpl: React.FC = () => {
   const switchOnAudioRef = React.useRef<HTMLAudioElement | null>(null)
   const switchOffAudioRef = React.useRef<HTMLAudioElement | null>(null)
 
-  const onToggleDarkMode = React.useCallback(
+  const onToggleTheme = React.useCallback(
     (e) => {
       e.preventDefault()
       toggleDarkMode()
@@ -51,7 +51,7 @@ export const FooterImpl: React.FC = () => {
             className={isDarkMode ? styles.toggleLightMode : styles.toggleDarkMode}
             href='#'
             role='button'
-            onClick={onToggleDarkMode}
+            onClick={onToggleTheme}
             title='Toggle dark mode'
           >
             {isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />}

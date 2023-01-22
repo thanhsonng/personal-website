@@ -8,20 +8,32 @@ import { Breadcrumbs, Header, Search, useNotionContext } from 'react-notion-x'
 
 import { isSearchEnabled, navigationLinks, navigationStyle } from '@/lib/config'
 import { useDarkMode } from '@/lib/use-dark-mode'
+import soundManager from '@/lib/sound'
 
 import styles from './styles.module.css'
 
 const ToggleThemeButton = () => {
   const [hasMounted, setHasMounted] = React.useState(false)
   const { isDarkMode, toggleDarkMode } = useDarkMode()
+  const switchOnAudioRef = React.useRef<HTMLAudioElement | null>(null)
+  const switchOffAudioRef = React.useRef<HTMLAudioElement | null>(null)
 
   React.useEffect(() => {
     setHasMounted(true)
+    // Sound logic has to be put inside an effect hook
+    // because it cannot run on the server
+    switchOnAudioRef.current = soundManager.createSound('/sounds/switch-on.mp3');
+    switchOffAudioRef.current = soundManager.createSound('/sounds/switch-off.mp3');
   }, [])
 
   const onToggleTheme = React.useCallback(() => {
     toggleDarkMode()
-  }, [toggleDarkMode])
+    if (isDarkMode) {
+      soundManager.play(switchOnAudioRef.current);
+    } else {
+      soundManager.play(switchOffAudioRef.current);
+    }
+  }, [toggleDarkMode, isDarkMode]);
 
   return (
     <div
