@@ -1,34 +1,71 @@
 import * as React from 'react'
-import cs from 'classnames'
-import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
-import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
-import { Header, Breadcrumbs, Search, useNotionContext } from 'react-notion-x'
-import * as types from 'notion-types'
+import { AnimatePresence, motion } from "framer-motion";
 
-import { useDarkMode } from 'lib/use-dark-mode'
-import { navigationStyle, navigationLinks, isSearchEnabled } from 'lib/config'
+import * as types from 'notion-types'
+import { Sun as SunIcon, Moon as MoonIcon } from 'react-feather';
+import cs from 'classnames'
+import { Breadcrumbs, Header, Search, useNotionContext } from 'react-notion-x'
+
+import { isSearchEnabled, navigationLinks, navigationStyle } from '@/lib/config'
+import { useDarkMode } from '@/lib/use-dark-mode'
+import soundManager from '@/lib/sound'
 
 import styles from './styles.module.css'
 
 const ToggleThemeButton = () => {
   const [hasMounted, setHasMounted] = React.useState(false)
   const { isDarkMode, toggleDarkMode } = useDarkMode()
+  const switchOnAudioRef = React.useRef<HTMLAudioElement | null>(null)
+  const switchOffAudioRef = React.useRef<HTMLAudioElement | null>(null)
 
   React.useEffect(() => {
     setHasMounted(true)
+    // Sound logic has to be put inside an effect hook
+    // because it cannot run on the server
+    switchOnAudioRef.current = soundManager.createSound('/sounds/switch-on.mp3');
+    switchOffAudioRef.current = soundManager.createSound('/sounds/switch-off.mp3');
   }, [])
 
   const onToggleTheme = React.useCallback(() => {
     toggleDarkMode()
-  }, [toggleDarkMode])
+    if (isDarkMode) {
+      soundManager.play(switchOnAudioRef.current);
+    } else {
+      soundManager.play(switchOffAudioRef.current);
+    }
+  }, [toggleDarkMode, isDarkMode]);
 
   return (
-    <div
-      className={cs('breadcrumb', 'button', !hasMounted && styles.hidden)}
+    <button
+      className={cs('breadcrumb', styles.iconButton, !hasMounted && styles.hidden)}
       onClick={onToggleTheme}
     >
-      {hasMounted && isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />}
-    </div>
+      {hasMounted && (
+        <AnimatePresence mode='wait'>
+          {isDarkMode ? (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              key="dark-theme"
+              className={styles.iconContainer}
+            >
+              <MoonIcon size={16} />
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              key="light-theme"
+              className={styles.iconContainer}
+            >
+              <SunIcon size={16} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
+    </button>
   )
 }
 

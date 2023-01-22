@@ -80,55 +80,6 @@
   margin-right: 0;
 }
 
-.settings a:hover,
-.social a:hover {
-  transition: all 50ms ease-in-out;
-}
-
-.toggleDarkMode:hover {
-  color: #7c3aed;
-}
-
-.toggleLightMode:hover {
-  color: #fde047;
-}
-
-.social a {
-  transform: scale(60%);
-}
-
-.social a:hover {
-  transform: scale(100%);
-}
-
-.twitter:hover {
-  color: #2795e9;
-}
-
-.zhihu:hover {
-  color: #0066ff;
-}
-
-.github:hover {
-  color: #333333;
-}
-
-.githubDarkMode:hover {
-  color: white;
-}
-
-.youtube:hover {
-  color: #ff0000;
-}
-
-.linkedin:hover {
-  color: #0077b5;
-}
-
-.newsletter:hover {
-  color: #777777;
-}
-
 .comments {
   width: 100%;
   margin-top: 2em;
@@ -228,4 +179,19 @@
 
 .hidden {
   visibility: hidden;
+}
+
+.iconButton {
+  border: none;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,9 +1,9 @@
-import Head from 'next/head'
 import * as React from 'react'
+import Head from 'next/head'
 
-import * as types from 'lib/types'
-import * as config from 'lib/config'
-import { getSocialImageUrl } from 'lib/get-social-image-url'
+import * as config from '@/lib/config'
+import * as types from '@/lib/types'
+import { getSocialImageUrl } from '@/lib/get-social-image-url'
 
 export const PageHead: React.FC<
   types.PageProps & {
@@ -60,7 +60,7 @@ export const PageHead: React.FC<
       {socialImageUrl ? (
         <>
           <meta name='twitter:card' content='summary_large_image' />
-          <meta name='twitter:image' content={socialImageUrl} />
+          <meta name='twitter:image:src' content={socialImageUrl} />
           <meta property='og:image' content={socialImageUrl} />
         </>
       ) : (
