@@ -9,12 +9,12 @@ export default siteConfig({
   rootNotionSpaceId: undefined,
 
   // basic site info (required)
-  name: 'Front-End Journey',
+  name: 'Son Nguyen\'s Front-End Journey',
   domain: 'sonng.dev',
   author: 'Son Nguyen',
 
   // open graph metadata (optional)
-  description: 'Front-End Journey by Son Nguyen',
+  description: 'Son Nguyen\'s Front-End Journey',
 
   // social usernames (optional)
   twitter: 'thanhsonng211',
