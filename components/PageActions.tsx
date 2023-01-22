@@ -1,7 +1,6 @@
 import * as React from 'react'
 
-import { AiOutlineRetweet } from '@react-icons/all-files/ai/AiOutlineRetweet'
-import { IoHeartOutline } from '@react-icons/all-files/io5/IoHeartOutline'
+import { RefreshCw as RetweetIcon, Heart as HeartIcon } from 'react-feather';
 
 import styles from './styles.module.css'
 
@@ -18,7 +17,7 @@ export const PageActions: React.FC<{ tweet: string }> = ({ tweet }) => {
         rel='noopener noreferrer'
         title='Like this post on Twitter'
       >
-        <IoHeartOutline />
+        <HeartIcon />
       </a>
 
       <a
@@ -28,7 +27,7 @@ export const PageActions: React.FC<{ tweet: string }> = ({ tweet }) => {
         rel='noopener noreferrer'
         title='Retweet this post on Twitter'
       >
-        <AiOutlineRetweet />
+        <RetweetIcon />
       </a>
     </div>
   )

@@ -2,8 +2,7 @@ import * as React from 'react'
 import { AnimatePresence, motion } from "framer-motion";
 
 import * as types from 'notion-types'
-import { RiSunFoggyLine as SunIcon } from '@react-icons/all-files/ri/RiSunFoggyLine'
-import { RiMoonClearLine as MoonIcon } from '@react-icons/all-files/ri/RiMoonClearLine'
+import { Sun as SunIcon, Moon as MoonIcon } from 'react-feather';
 import cs from 'classnames'
 import { Breadcrumbs, Header, Search, useNotionContext } from 'react-notion-x'
 
@@ -51,7 +50,7 @@ const ToggleThemeButton = () => {
               key="dark-theme"
               className={styles.iconContainer}
             >
-              <MoonIcon />
+              <MoonIcon size={16} />
             </motion.div>
           ) : (
             <motion.div
@@ -61,7 +60,7 @@ const ToggleThemeButton = () => {
               key="light-theme"
               className={styles.iconContainer}
             >
-              <SunIcon />
+              <SunIcon size={16} />
             </motion.div>
           )}
         </AnimatePresence>

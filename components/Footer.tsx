@@ -1,10 +1,12 @@
 import * as React from 'react'
-import { RiTwitterLine as TwitterIcon } from '@react-icons/all-files/ri/RiTwitterLine'
-import { RiGithubLine as GithubIcon } from '@react-icons/all-files/ri/RiGithubLine'
-import { RiLinkedinLine as LinkedInIcon } from '@react-icons/all-files/ri/RiLinkedinLine'
-import { RiYoutubeLine as YouTubeIcon } from '@react-icons/all-files/ri/RiYoutubeLine'
-import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
-import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
+import {
+  Sun as SunIcon,
+  Moon as MoonIcon,
+  Twitter as TwitterIcon,
+  GitHub as GitHubIcon,
+  Linkedin as LinkedInIcon,
+  Youtube as YouTubeIcon,
+} from 'react-feather';
 
 import soundManager from '@/lib/sound'
 import * as config from '@/lib/config'
@@ -54,7 +56,7 @@ export const FooterImpl: React.FC = () => {
             onClick={onToggleTheme}
             title='Toggle dark mode'
           >
-            {isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />}
+            {isDarkMode ? <MoonIcon /> : <SunIcon />}
           </a>
         )}
       </div>
@@ -80,7 +82,7 @@ export const FooterImpl: React.FC = () => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <GithubIcon />
+            <GitHubIcon />
           </a>
         )}
 
