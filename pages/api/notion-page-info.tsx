@@ -20,7 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(405).send({ error: 'method not allowed' })
   }
 
-  const pageId: string = parsePageId(req.body.pageId)
+  const pageId: string = parsePageId(req.body.pageId, { uuid: false })
   if (!pageId) {
     throw new Error('Invalid notion page id')
   }
