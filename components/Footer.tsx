@@ -84,49 +84,49 @@ export const FooterImpl: React.FC = () => {
       <div className={styles.social}>
         {config.twitter && (
           <a
-            className={styles.twitter}
+            className="w-10 h-10 flex justify-center items-center transition-colors rounded hover:bg-bg0"
             href={`https://twitter.com/${config.twitter}`}
             title={`Twitter @${config.twitter}`}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <TwitterIcon />
+            <TwitterIcon size={16} />
           </a>
         )}
 
         {config.github && (
           <a
-            className={isDarkMode ? styles.githubDarkMode : styles.github}
+            className="w-10 h-10 flex justify-center items-center transition-colors rounded hover:bg-bg0"
             href={`https://github.com/${config.github}`}
             title={`GitHub @${config.github}`}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <GitHubIcon />
+            <GitHubIcon size={16} />
           </a>
         )}
 
         {config.linkedin && (
           <a
-            className={styles.linkedin}
+            className="w-10 h-10 flex justify-center items-center transition-colors rounded hover:bg-bg0"
             href={`https://www.linkedin.com/in/${config.linkedin}`}
             title={`LinkedIn ${config.author}`}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <LinkedInIcon />
+            <LinkedInIcon size={16} />
           </a>
         )}
 
         {config.youtube && (
           <a
-            className={styles.youtube}
+            className="w-10 h-10 flex justify-center items-center transition-colors rounded hover:bg-bg0"
             href={`https://www.youtube.com/${config.youtube}`}
             title={`YouTube ${config.author}`}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <YouTubeIcon />
+            <YouTubeIcon size={16} />
           </a>
         )}
       </div>
