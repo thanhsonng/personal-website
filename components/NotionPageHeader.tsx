@@ -1,8 +1,9 @@
 import * as React from 'react'
+import { AnimatePresence, motion } from "framer-motion";
 
 import * as types from 'notion-types'
-import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
-import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
+import { RiSunFoggyLine as SunIcon } from '@react-icons/all-files/ri/RiSunFoggyLine'
+import { RiMoonClearLine as MoonIcon } from '@react-icons/all-files/ri/RiMoonClearLine'
 import cs from 'classnames'
 import { Breadcrumbs, Header, Search, useNotionContext } from 'react-notion-x'
 
@@ -36,12 +37,36 @@ const ToggleThemeButton = () => {
   }, [toggleDarkMode, isDarkMode]);
 
   return (
-    <div
-      className={cs('breadcrumb', 'button', !hasMounted && styles.hidden)}
+    <button
+      className={cs('breadcrumb', styles.iconButton, !hasMounted && styles.hidden)}
       onClick={onToggleTheme}
     >
-      {hasMounted && isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />}
-    </div>
+      {hasMounted && (
+        <AnimatePresence mode='wait'>
+          {isDarkMode ? (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              key="dark-theme"
+              className={styles.iconContainer}
+            >
+              <MoonIcon />
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              key="light-theme"
+              className={styles.iconContainer}
+            >
+              <SunIcon />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
+    </button>
   )
 }
 
