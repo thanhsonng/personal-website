@@ -85,14 +85,6 @@
   transition: all 50ms ease-in-out;
 }
 
-.toggleDarkMode:hover {
-  color: #7c3aed;
-}
-
-.toggleLightMode:hover {
-  color: #fde047;
-}
-
 .social a {
   transform: scale(60%);
 }

@@ -7,6 +7,7 @@ import {
   Linkedin as LinkedInIcon,
   Youtube as YouTubeIcon,
 } from 'react-feather';
+import { AnimatePresence, motion } from "framer-motion";
 
 import soundManager from '@/lib/sound'
 import * as config from '@/lib/config'
@@ -49,15 +50,34 @@ export const FooterImpl: React.FC = () => {
 
       <div className={styles.settings}>
         {hasMounted && (
-          <a
-            className={isDarkMode ? styles.toggleLightMode : styles.toggleDarkMode}
-            href='#'
-            role='button'
+          <button
+            className="w-10 h-10 flex justify-center items-center transition-colors rounded hover:bg-bg0"
             onClick={onToggleTheme}
-            title='Toggle dark mode'
           >
-            {isDarkMode ? <MoonIcon /> : <SunIcon />}
-          </a>
+            <AnimatePresence mode='wait'>
+              {isDarkMode ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  key="dark-theme"
+                  className={styles.iconContainer}
+                >
+                  <MoonIcon size={16} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  key="light-theme"
+                  className={styles.iconContainer}
+                >
+                  <SunIcon size={16} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
         )}
       </div>
 
