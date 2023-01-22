@@ -65,7 +65,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     (block as PageBlock).format?.page_cover,
     block
   )
-  const imageFallbackUrl = mapImageUrl(libConfig.defaultPageCover, block)
+  const imageFallbackUrl = libConfig.defaultSocialImageThumbnail;
 
   const blockIcon = getBlockIcon(block, recordMap)
   const authorImageBlockUrl = mapImageUrl(
