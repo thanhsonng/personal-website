@@ -46,9 +46,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   }
 
+  const isHomePage = pageId === libConfig.rootNotionPageId;
   const isBlogPost =
     block.type === 'page' && block.parent_table === 'collection'
-  const title = getBlockTitle(block, recordMap) || libConfig.name
+  const title = isHomePage
+    ? libConfig.name
+    : getBlockTitle(block, recordMap) || libConfig.name
 
   const imageCoverPosition =
     (block as PageBlock).format?.page_cover_position ??
@@ -59,7 +62,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const imageBlockUrl = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
-      (block as PageBlock).format?.page_cover,
+    (block as PageBlock).format?.page_cover,
     block
   )
   const imageFallbackUrl = mapImageUrl(libConfig.defaultPageCover, block)
@@ -72,7 +75,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const authorImageFallbackUrl = mapImageUrl(libConfig.defaultPageIcon, block)
   const [authorImage, image] = await Promise.all([
     getCompatibleImageUrl(authorImageBlockUrl, authorImageFallbackUrl),
-    getCompatibleImageUrl(imageBlockUrl, imageFallbackUrl)
+    isHomePage ? libConfig.defaultSocialImageThumbnail : getCompatibleImageUrl(imageBlockUrl, imageFallbackUrl)
   ])
 
   const author =
@@ -97,8 +100,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const date =
     isBlogPost && datePublished
       ? `${datePublished.toLocaleString('en-US', {
-          month: 'long'
-        })} ${datePublished.getFullYear()}`
+        month: 'long'
+      })} ${datePublished.getFullYear()}`
       : undefined
   const detail = date || author || libConfig.domain
 
