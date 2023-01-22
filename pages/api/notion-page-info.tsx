@@ -20,7 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(405).send({ error: 'method not allowed' })
   }
 
-  const pageId: string = parsePageId(req.body.pageId)
+  const pageId: string = parsePageId(req.body.pageId, { uuid: false })
   if (!pageId) {
     throw new Error('Invalid notion page id')
   }
@@ -65,7 +65,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     (block as PageBlock).format?.page_cover,
     block
   )
-  const imageFallbackUrl = mapImageUrl(libConfig.defaultPageCover, block)
+  const imageFallbackUrl = libConfig.defaultSocialImageThumbnail;
 
   const blockIcon = getBlockIcon(block, recordMap)
   const authorImageBlockUrl = mapImageUrl(
